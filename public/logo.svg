@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Unified Network Holdings: hexagonal fractal -->
+  <!-- Outer hexagon contains smaller hexagons at its 6 vertices, with thin lines connecting them -->
+  <!-- Self-similar, recursive, governance/structure feel -->
+
+  <defs>
+    <linearGradient id="unhGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8ff00"/>
+      <stop offset="100%" stop-color="#88c000"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(100,100)">
+    <!-- Outer hexagon: vertices at 60-degree intervals, radius 80 -->
+    <!-- A regular hexagon: vertex angles at 0, 60, 120, 180, 240, 300 -->
+    <polygon
+      points="80,0 40,69.28 -40,69.28 -80,0 -40,-69.28 40,-69.28"
+      fill="none"
+      stroke="url(#unhGrad)"
+      stroke-width="2.5"
+      stroke-linejoin="round"
+    />
+
+    <!-- Inner hexagon: smaller, rotated 30 degrees for visual depth -->
+    <polygon
+      points="40,0 20,34.64 -20,34.64 -40,0 -20,-34.64 20,-34.64"
+      fill="none"
+      stroke="url(#unhGrad)"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+      opacity="0.7"
+    />
+
+    <!-- Center: small filled hexagon (the "core") -->
+    <polygon
+      points="14,0 7,12.12 -7,12.12 -14,0 -7,-12.12 7,-12.12"
+      fill="url(#unhGrad)"
+    />
+
+    <!-- Small hexagons at each outer vertex (the "recursive" / fractal part) -->
+    <g>
+      <!-- Top-right -->
+      <polygon points="80,0 75,8.66 65,8.66 60,0 65,-8.66 75,-8.66" fill="url(#unhGrad)" opacity="0.9"/>
+      <!-- Right-bottom -->
+      <polygon points="40,69.28 35,77.94 25,77.94 20,69.28 25,60.62 35,60.62" fill="url(#unhGrad)" opacity="0.9"/>
+      <!-- Left-bottom -->
+      <polygon points="-40,69.28 -45,77.94 -55,77.94 -60,69.28 -55,60.62 -45,60.62" fill="url(#unhGrad)" opacity="0.9"/>
+      <!-- Left -->
+      <polygon points="-80,0 -85,8.66 -95,8.66 -100,0 -95,-8.66 -85,-8.66" fill="url(#unhGrad)" opacity="0.9"/>
+      <!-- Left-top -->
+      <polygon points="-40,-69.28 -45,-60.62 -55,-60.62 -60,-69.28 -55,-77.94 -45,-77.94" fill="url(#unhGrad)" opacity="0.9"/>
+      <!-- Right-top -->
+      <polygon points="40,-69.28 35,-60.62 25,-60.62 20,-69.28 25,-77.94 35,-77.94" fill="url(#unhGrad)" opacity="0.9"/>
+    </g>
+
+    <!-- Connection lines from center to each outer vertex (the "unified network") -->
+    <g stroke="url(#unhGrad)" stroke-width="1" opacity="0.5" stroke-linecap="round">
+      <line x1="0" y1="0" x2="80" y2="0"/>
+      <line x1="0" y1="0" x2="40" y2="69.28"/>
+      <line x1="0" y1="0" x2="-40" y2="69.28"/>
+      <line x1="0" y1="0" x2="-80" y2="0"/>
+      <line x1="0" y1="0" x2="-40" y2="-69.28"/>
+      <line x1="0" y1="0" x2="40" y2="-69.28"/>
+    </g>
+  </g>
+</svg>
