@@ -1,56 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
-  <!-- Unified Network Holdings v5: Apollonian Gasket Fractal inside a Circle -->
-  <!-- A literal fractal: large outer circle, with smaller circles recursively packed into the gaps. -->
-  <!-- The pattern is self-similar — each new gap gets its own small circle, which creates more gaps, which get more circles, etc. -->
-  <!-- Strong visual structure + mathematical beauty = reads instantly as "cool fractal in a circle". -->
+<svg xmlns="http://w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <!-- Unified Network Holdings v6: Symmetric Circle Fractal -->
+  <!-- A mandala-like fractal: central circle, 6 equal circles around it at 60° intervals, -->
+  <!-- with smaller circles filling the gaps. Perfectly symmetrical (6-fold rotational). -->
+  <!-- Same neon green + navy color scheme as v5. -->
 
   <defs>
-    <linearGradient id="unhApollonian" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="unhFractal" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#c8ff00"/>
       <stop offset="100%" stop-color="#88c000"/>
     </linearGradient>
-    <clipPath id="outerCircle">
-      <!-- Mask everything to the outer circle so gasket circles that extend beyond get clipped -->
-      <circle cx="120" cy="120" r="100"/>
-    </clipPath>
   </defs>
 
   <g transform="translate(120,120)">
-    <!-- Outer circle: filled background, no stroke (so the gasket fills the whole interior) -->
-    <circle cx="0" cy="0" r="100" fill="url(#unhApollonian)"/>
+    <!-- Outer ring: the frame, filled with the gradient (so the inner negative space stands out) -->
+    <!-- Using stroke only on the outer ring to keep the background see-through -->
+    <circle cx="0" cy="0" r="110" fill="url(#unhFractal)"/>
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#0a1929" stroke-width="3"/>
 
-    <!-- Largest inner circle (the "white" of the gasket) - centered slightly above middle -->
-    <!-- Real Apollonian gasket: largest inner circle is tangent to outer at the top -->
-    <circle cx="0" cy="-50" r="50" fill="none" stroke="#0a1929" stroke-width="2"/>
-    <!-- The two smaller circles flanking it (Descartes' Circle Theorem) -->
-    <circle cx="-43.3" cy="25" r="25" fill="none" stroke="#0a1929" stroke-width="2"/>
-    <circle cx="43.3" cy="25" r="25" fill="none" stroke="#0a1929" stroke-width="2"/>
+    <!-- Inner negative space (navy) for the fractal to sit on, with a thin border -->
+    <circle cx="0" cy="0" r="95" fill="#0a1929"/>
+    <circle cx="0" cy="0" r="95" fill="none" stroke="#0a1929" stroke-width="1" opacity="0.5"/>
 
-    <!-- Even smaller circles in the gaps (level 2) -->
-    <!-- The gap between the big top circle and the bottom-left circle -->
-    <circle cx="-23" cy="-15" r="12" fill="none" stroke="#0a1929" stroke-width="1.5"/>
-    <!-- The gap between the big top circle and the bottom-right circle -->
-    <circle cx="23" cy="-15" r="12" fill="none" stroke="#0a1929" stroke-width="1.5"/>
-    <!-- The gap between the two bottom circles -->
-    <circle cx="0" cy="35" r="12" fill="none" stroke="#0a1929" stroke-width="1.5"/>
+    <!-- Central circle: the heart of the fractal -->
+    <circle cx="0" cy="0" r="22" fill="none" stroke="url(#unhFractal)" stroke-width="2.5"/>
 
-    <!-- Level 3: tiny circles in the next round of gaps -->
-    <circle cx="-12" cy="0" r="5" fill="none" stroke="#0a1929" stroke-width="1"/>
-    <circle cx="12" cy="0" r="5" fill="none" stroke="#0a1929" stroke-width="1"/>
-    <circle cx="0" cy="-25" r="5" fill="none" stroke="#0a1929" stroke-width="1"/>
-    <circle cx="-22" cy="20" r="4" fill="none" stroke="#0a1929" stroke-width="1"/>
-    <circle cx="22" cy="20" r="4" fill="none" stroke="#0a1929" stroke-width="1"/>
-    <circle cx="0" cy="48" r="4" fill="none" stroke="#0a1929" stroke-width="1"/>
+    <!-- 6 equal circles around the center, at 60° intervals, all tangent to the central circle -->
+    <!-- For a tangent configuration: distance from center = 2 * radius -->
+    <!-- Radius = 22, so distance = 44 -->
+    <g fill="none" stroke="url(#unhFractal)" stroke-width="2">
+      <!-- 0° (right) -->
+      <circle cx="44" cy="0" r="22"/>
+      <!-- 60° (top-right) -->
+      <circle cx="22" cy="-38.1" r="22"/>
+      <!-- 120° (top-left) -->
+      <circle cx="-22" cy="-38.1" r="22"/>
+      <!-- 180° (left) -->
+      <circle cx="-44" cy="0" r="22"/>
+      <!-- 240° (bottom-left) -->
+      <circle cx="-22" cy="38.1" r="22"/>
+      <!-- 300° (bottom-right) -->
+      <circle cx="22" cy="38.1" r="22"/>
+    </g>
 
-    <!-- Level 4: even tinier dots in remaining gaps (just accents) -->
-    <circle cx="-6" cy="-8" r="2" fill="#0a1929"/>
-    <circle cx="6" cy="-8" r="2" fill="#0a1929"/>
-    <circle cx="-6" cy="10" r="2" fill="#0a1929"/>
-    <circle cx="6" cy="10" r="2" fill="#0a1929"/>
-    <circle cx="-15" cy="0" r="1.5" fill="#0a1929"/>
-    <circle cx="15" cy="0" r="1.5" fill="#0a1929"/>
+    <!-- Smaller circles in the gaps between adjacent outer circles (recursion level 1) -->
+    <!-- The gaps form small lens shapes; placing circles in the centers of those gaps -->
+    <!-- creates the self-similar pattern. 6 gaps, one circle each. -->
+    <g fill="url(#unhFractal)">
+      <!-- Gap between 0° and 60° circle, positioned at 30° from center at distance 44 -->
+      <circle cx="36.4" cy="-22" r="4"/>
+      <!-- Gap between 60° and 120° -->
+      <circle cx="0" cy="-51" r="4"/>
+      <!-- Gap between 120° and 180° -->
+      <circle cx="-36.4" cy="-22" r="4"/>
+      <!-- Gap between 180° and 240° -->
+      <circle cx="-36.4" cy="22" r="4"/>
+      <!-- Gap between 240° and 300° -->
+      <circle cx="0" cy="51" r="4"/>
+      <!-- Gap between 300° and 0° -->
+      <circle cx="36.4" cy="22" r="4"/>
+    </g>
 
-    <!-- Outer ring border (the frame) -->
-    <circle cx="0" cy="0" r="100" fill="none" stroke="#0a1929" stroke-width="3"/>
+    <!-- Even smaller circles in the gaps between the central circle and each outer circle (recursion level 2) -->
+    <!-- 6 small dots positioned midway between center and each outer circle -->
+    <g fill="url(#unhFractal)">
+      <circle cx="22" cy="0" r="3"/>
+      <circle cx="11" cy="-19" r="3"/>
+      <circle cx="-11" cy="-19" r="3"/>
+      <circle cx="-22" cy="0" r="3"/>
+      <circle cx="-11" cy="19" r="3"/>
+      <circle cx="11" cy="19" r="3"/>
+    </g>
+
+    <!-- Tiny accent dots at the outer edge (the "stardust" between fractal elements) -->
+    <g fill="url(#unhFractal)" opacity="0.6">
+      <!-- 6 dots positioned just inside the outer ring, at 60° intervals -->
+      <circle cx="80" cy="0" r="2"/>
+      <circle cx="40" cy="-69.3" r="2"/>
+      <circle cx="-40" cy="-69.3" r="2"/>
+      <circle cx="-80" cy="0" r="2"/>
+      <circle cx="-40" cy="69.3" r="2"/>
+      <circle cx="40" cy="69.3" r="2"/>
+    </g>
   </g>
 </svg>
