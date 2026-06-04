@@ -1,129 +1,56 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
-  <!-- Unified Network Holdings v4: Hexagonal Sierpinski Fractal -->
-  <!-- A proper hex Sierpinski subdivision: outer hex is divided into 7 sub-hexes -->
-  <!-- (1 center + 6 around), and that subdivision is recursively applied. -->
-  <!-- Math: sub-hex side = outer hex side / 3. -->
+  <!-- Unified Network Holdings v5: Apollonian Gasket Fractal inside a Circle -->
+  <!-- A literal fractal: large outer circle, with smaller circles recursively packed into the gaps. -->
+  <!-- The pattern is self-similar — each new gap gets its own small circle, which creates more gaps, which get more circles, etc. -->
+  <!-- Strong visual structure + mathematical beauty = reads instantly as "cool fractal in a circle". -->
 
   <defs>
-    <linearGradient id="unhFractal" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="unhApollonian" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#c8ff00"/>
       <stop offset="100%" stop-color="#88c000"/>
     </linearGradient>
+    <clipPath id="outerCircle">
+      <!-- Mask everything to the outer circle so gasket circles that extend beyond get clipped -->
+      <circle cx="120" cy="120" r="100"/>
+    </clipPath>
   </defs>
 
   <g transform="translate(120,120)">
-    <!-- OUTER HEX: side length 100, vertices at angles 0, 60, 120, 180, 240, 300 from center -->
-    <!-- For a regular hexagon, vertex = side-length distance from center, so radius = 100 -->
-    <!-- Vertices: (100,0), (50,86.6), (-50,86.6), (-100,0), (-50,-86.6), (50,-86.6) -->
-    <polygon
-      points="100,0 50,86.6 -50,86.6 -100,0 -50,-86.6 50,-86.6"
-      fill="none"
-      stroke="url(#unhFractal)"
-      stroke-width="2"
-    />
+    <!-- Outer circle: filled background, no stroke (so the gasket fills the whole interior) -->
+    <circle cx="0" cy="0" r="100" fill="url(#unhApollonian)"/>
 
-    <!-- LEVEL 1 SUBDIVISION into 7 sub-hexes (correct Sierpinski hex math) -->
-    <!-- Sub-hex side = 100/3 ≈ 33.33, so sub-hex "radius" (center to vertex) = 33.33 -->
+    <!-- Largest inner circle (the "white" of the gasket) - centered slightly above middle -->
+    <!-- Real Apollonian gasket: largest inner circle is tangent to outer at the top -->
+    <circle cx="0" cy="-50" r="50" fill="none" stroke="#0a1929" stroke-width="2"/>
+    <!-- The two smaller circles flanking it (Descartes' Circle Theorem) -->
+    <circle cx="-43.3" cy="25" r="25" fill="none" stroke="#0a1929" stroke-width="2"/>
+    <circle cx="43.3" cy="25" r="25" fill="none" stroke="#0a1929" stroke-width="2"/>
 
-    <!-- Center sub-hex: centered at origin, side 33.33 -->
-    <polygon
-      points="33.33,0 16.67,28.87 -16.67,28.87 -33.33,0 -16.67,-28.87 16.67,-28.87"
-      fill="url(#unhFractal)"
-    />
+    <!-- Even smaller circles in the gaps (level 2) -->
+    <!-- The gap between the big top circle and the bottom-left circle -->
+    <circle cx="-23" cy="-15" r="12" fill="none" stroke="#0a1929" stroke-width="1.5"/>
+    <!-- The gap between the big top circle and the bottom-right circle -->
+    <circle cx="23" cy="-15" r="12" fill="none" stroke="#0a1929" stroke-width="1.5"/>
+    <!-- The gap between the two bottom circles -->
+    <circle cx="0" cy="35" r="12" fill="none" stroke="#0a1929" stroke-width="1.5"/>
 
-    <!-- 6 sub-hexes around the center, each sharing one edge with the center hex -->
-    <!-- Sub-hex position = (sub-hex radius) * (unit vector toward adjacent center-hex edge midpoint) -->
-    <!-- Adjacent edge midpoints of center hex are at: -->
-    <!--   right  : (33.33, 0)         -> sub-hex at (66.67, 0) -->
-    <!--   top-right: (16.67, -28.87)  -> sub-hex at (33.33, -57.74) -->
-    <!--   top-left:  (-16.67, -28.87) -> sub-hex at (-33.33, -57.74) -->
-    <!--   left:   (-33.33, 0)        -> sub-hex at (-66.67, 0) -->
-    <!--   bot-left:  (-16.67, 28.87)  -> sub-hex at (-33.33, 57.74) -->
-    <!--   bot-right: (16.67, 28.87)   -> sub-hex at (33.33, 57.74) -->
+    <!-- Level 3: tiny circles in the next round of gaps -->
+    <circle cx="-12" cy="0" r="5" fill="none" stroke="#0a1929" stroke-width="1"/>
+    <circle cx="12" cy="0" r="5" fill="none" stroke="#0a1929" stroke-width="1"/>
+    <circle cx="0" cy="-25" r="5" fill="none" stroke="#0a1929" stroke-width="1"/>
+    <circle cx="-22" cy="20" r="4" fill="none" stroke="#0a1929" stroke-width="1"/>
+    <circle cx="22" cy="20" r="4" fill="none" stroke="#0a1929" stroke-width="1"/>
+    <circle cx="0" cy="48" r="4" fill="none" stroke="#0a1929" stroke-width="1"/>
 
-    <!-- Right sub-hex (at 66.67, 0) - filled, showing recursion -->
-    <g transform="translate(66.67, 0)">
-      <polygon
-        points="33.33,0 16.67,28.87 -16.67,28.87 -33.33,0 -16.67,-28.87 16.67,-28.87"
-        fill="none"
-        stroke="url(#unhFractal)"
-        stroke-width="1.5"
-      />
-      <!-- Level 2 subdivision: 7 even smaller hexes inside this one (side ~11.11) -->
-      <polygon
-        points="11.11,0 5.56,9.62 -5.56,9.62 -11.11,0 -5.56,-9.62 5.56,-9.62"
-        fill="url(#unhFractal)"
-      />
-    </g>
+    <!-- Level 4: even tinier dots in remaining gaps (just accents) -->
+    <circle cx="-6" cy="-8" r="2" fill="#0a1929"/>
+    <circle cx="6" cy="-8" r="2" fill="#0a1929"/>
+    <circle cx="-6" cy="10" r="2" fill="#0a1929"/>
+    <circle cx="6" cy="10" r="2" fill="#0a1929"/>
+    <circle cx="-15" cy="0" r="1.5" fill="#0a1929"/>
+    <circle cx="15" cy="0" r="1.5" fill="#0a1929"/>
 
-    <!-- Top-right sub-hex (at 33.33, -57.74) -->
-    <g transform="translate(33.33, -57.74)">
-      <polygon
-        points="33.33,0 16.67,28.87 -16.67,28.87 -33.33,0 -16.67,-28.87 16.67,-28.87"
-        fill="none"
-        stroke="url(#unhFractal)"
-        stroke-width="1.5"
-      />
-      <polygon
-        points="11.11,0 5.56,9.62 -5.56,9.62 -11.11,0 -5.56,-9.62 5.56,-9.62"
-        fill="url(#unhFractal)"
-      />
-    </g>
-
-    <!-- Top-left sub-hex (at -33.33, -57.74) -->
-    <g transform="translate(-33.33, -57.74)">
-      <polygon
-        points="33.33,0 16.67,28.87 -16.67,28.87 -33.33,0 -16.67,-28.87 16.67,-28.87"
-        fill="none"
-        stroke="url(#unhFractal)"
-        stroke-width="1.5"
-      />
-      <polygon
-        points="11.11,0 5.56,9.62 -5.56,9.62 -11.11,0 -5.56,-9.62 5.56,-9.62"
-        fill="url(#unhFractal)"
-      />
-    </g>
-
-    <!-- Left sub-hex (at -66.67, 0) -->
-    <g transform="translate(-66.67, 0)">
-      <polygon
-        points="33.33,0 16.67,28.87 -16.67,28.87 -33.33,0 -16.67,-28.87 16.67,-28.87"
-        fill="none"
-        stroke="url(#unhFractal)"
-        stroke-width="1.5"
-      />
-      <polygon
-        points="11.11,0 5.56,9.62 -5.56,9.62 -11.11,0 -5.56,-9.62 5.56,-9.62"
-        fill="url(#unhFractal)"
-      />
-    </g>
-
-    <!-- Bottom-left sub-hex (at -33.33, 57.74) -->
-    <g transform="translate(-33.33, 57.74)">
-      <polygon
-        points="33.33,0 16.67,28.87 -16.67,28.87 -33.33,0 -16.67,-28.87 16.67,-28.87"
-        fill="none"
-        stroke="url(#unhFractal)"
-        stroke-width="1.5"
-      />
-      <polygon
-        points="11.11,0 5.56,9.62 -5.56,9.62 -11.11,0 -5.56,-9.62 5.56,-9.62"
-        fill="url(#unhFractal)"
-      />
-    </g>
-
-    <!-- Bottom-right sub-hex (at 33.33, 57.74) -->
-    <g transform="translate(33.33, 57.74)">
-      <polygon
-        points="33.33,0 16.67,28.87 -16.67,28.87 -33.33,0 -16.67,-28.87 16.67,-28.87"
-        fill="none"
-        stroke="url(#unhFractal)"
-        stroke-width="1.5"
-      />
-      <polygon
-        points="11.11,0 5.56,9.62 -5.56,9.62 -11.11,0 -5.56,-9.62 5.56,-9.62"
-        fill="url(#unhFractal)"
-      />
-    </g>
+    <!-- Outer ring border (the frame) -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#0a1929" stroke-width="3"/>
   </g>
 </svg>
