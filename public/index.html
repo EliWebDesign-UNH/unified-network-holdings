@@ -3,31 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unified Network Holdings</title>
-  <meta name="description" content="Unified Network Holdings — governance entity.">
+  <title>Unified Network Holdings — Governance</title>
+  <meta name="description" content="Unified Network Holdings — a private holding company for a portfolio of digital services operating in New Mexico.">
+  <meta name="author" content="Unified Network Holdings">
+  <meta property="og:title" content="Unified Network Holdings">
+  <meta property="og:description" content="Governance entity for a portfolio of digital services in New Mexico.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
-  <main class="container">
-    <div class="card">
-      <h1>Unified Network Holdings</h1>
-      <p class="tagline">Albuquerque, New Mexico</p>
-      <p>This is the corporate governance entity for a portfolio of digital services operating in New Mexico.</p>
+  <main class="wrap">
+    <header class="top">
+      <a href="/" class="brand" aria-label="Unified Network Holdings home">
+        <svg class="brand-mark" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 12 L12 3 L21 12 L12 21 Z" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+        </svg>
+        <span class="brand-name">UNH</span>
+      </a>
+      <nav class="top-nav" aria-label="Sections">
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-      <h2>Operating Companies</h2>
-      <ul>
-        <li><strong>Zia Connections</strong> — Website-as-a-Service agency for local small businesses. <a href="https://ziaconnections.com">ziaconnections.com</a></li>
-      </ul>
+    <section class="hero">
+      <p class="kicker"><span class="dot"></span> Albuquerque, New Mexico · Est. 2024</p>
+      <h1 class="headline">Governance for a portfolio of <span class="accent">digital services.</span></h1>
+      <p class="lede">Unified Network Holdings is the corporate parent for operating companies that build, ship, and maintain software and web services for the local New Mexico market.</p>
+    </section>
 
-      <h2>Contact</h2>
-      <p>For legal, banking, and corporate filings correspondence, please use the registered agent on file with the New Mexico Secretary of State.</p>
-      <p>For operational inquiries related to operating companies, please contact the relevant subsidiary directly.</p>
+    <section class="grid-3" id="about">
+      <div class="stat">
+        <div class="stat-num">01</div>
+        <div class="stat-label">Active operating company</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Bootstrapped. No outside capital.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Services monitored in production</div>
+      </div>
+    </section>
 
-      <footer>
-        <p class="muted">© <span id="year"></span> Unified Network Holdings, LLC. All rights reserved.</p>
-      </footer>
-    </div>
+    <section id="portfolio" class="portfolio">
+      <div class="section-head">
+        <h2>Operating companies</h2>
+        <a href="#contact" class="link-arrow">Get in touch →</a>
+      </div>
+      <a class="co" href="https://zia-connections-website-production.up.railway.app" target="_blank" rel="noopener">
+        <div class="co-meta">
+          <span class="co-tag">Live</span>
+          <span class="co-loc">Albuquerque, NM</span>
+        </div>
+        <h3 class="co-name">Zia Connections</h3>
+        <p class="co-desc">Website-as-a-Service agency for local small businesses. Design, hosting, and ongoing maintenance on a simple monthly subscription.</p>
+        <div class="co-foot">
+          <span class="co-cta">Visit site →</span>
+          <span class="co-domain">zia-connections-website-production.up.railway.app</span>
+        </div>
+      </a>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact-head">
+        <h2>Contact</h2>
+        <p>For legal, banking, and corporate filings, please use the registered agent on file with the New Mexico Secretary of State.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-label">Operations</div>
+          <div class="contact-value">eli@unifiednetworkholdings.com</div>
+          <a class="contact-link" href="mailto:eli@unifiednetworkholdings.com">Email →</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Subsidiary inquiries</div>
+          <div class="contact-value">Reach the operating company directly.</div>
+          <a class="contact-link" href="https://zia-connections-website-production.up.railway.app" target="_blank" rel="noopener">Zia Connections →</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-left">© <span id="year"></span> Unified Network Holdings</div>
+      <div class="foot-right">Built and maintained in Albuquerque, NM.</div>
+    </footer>
   </main>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
