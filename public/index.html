@@ -10,14 +10,15 @@
   <meta property="og:description" content="Governance entity for a portfolio of digital services in New Mexico.">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" type="image/svg+xml" href="/logo.svg?v=6">
-  <!-- cache buster: ?v=6 forces browsers to refetch the new logo (symmetric fractal v6) -->
+  <link rel="icon" type="image/svg+xml" href="/logo-mark.svg?v=7">
+  <!-- logo-mark.svg is the small-size variant (v7-simple); logo.svg is the detailed v6 hero version -->
+  <link rel="preload" as="image" type="image/svg+xml" href="/logo.svg?v=6">
 </head>
 <body>
   <main class="wrap">
     <header class="top">
       <a href="/" class="brand" aria-label="Unified Network Holdings home">
-        <img src="/logo.svg?v=6" class="brand-mark" width="28" height="28" alt="Unified Network Holdings logo" />
+        <img src="/logo-mark.svg?v=7" class="brand-mark" width="32" height="32" alt="Unified Network Holdings logo" />
         <span class="brand-name">UNH</span>
       </a>
       <nav class="top-nav" aria-label="Sections">
@@ -28,6 +29,7 @@
     </header>
 
     <section class="hero">
+      <img src="/logo.svg?v=6" class="hero-mark" width="180" height="180" alt="Unified Network Holdings fractal mark" />
       <p class="kicker"><span class="dot"></span> Albuquerque, New Mexico · Est. 2024</p>
       <h1 class="headline">Governance for a portfolio of <span class="accent">digital services.</span></h1>
       <p class="lede">Unified Network Holdings is the corporate parent for operating companies that build, ship, and maintain software and web services for the local New Mexico market.</p>
