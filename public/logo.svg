@@ -1,67 +1,145 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <!-- Unified Network Holdings: hexagonal fractal, centered composition -->
-  <!-- Outer hexagon contains a smaller concentric hexagon, with a node-hex at each outer vertex -->
-  <!-- All elements share the same centroid; visual weight is balanced -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <!-- Unified Network Holdings: hexagon frame + Celtic-knot network + 4 embedded icons + glowing nodes -->
+  <!-- Reference: hexagon border (gold/bronze), navy background, weaving teal/gold bands, 4 quadrant icons, glowing white nodes -->
 
   <defs>
-    <linearGradient id="unhGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#c8ff00"/>
-      <stop offset="100%" stop-color="#88c000"/>
+    <!-- Navy background -->
+    <linearGradient id="navyBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1929"/>
+      <stop offset="100%" stop-color="#1a2942"/>
     </linearGradient>
+    <!-- Teal/bronze band gradients -->
+    <linearGradient id="tealBand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a9b8f"/>
+      <stop offset="100%" stop-color="#1f5a5a"/>
+    </linearGradient>
+    <linearGradient id="goldBand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a574"/>
+      <stop offset="100%" stop-color="#a67c52"/>
+    </linearGradient>
+    <!-- Glow filter for nodes -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <g transform="translate(100,100)">
-    <!-- Outer hexagon: regular, vertices at 60-deg intervals, radius 70 -->
-    <!-- A regular hexagon: vertex angles at 0, 60, 120, 180, 240, 300 -->
+  <g transform="translate(120,120)">
+    <!-- Hexagon frame with dark fill (the "container") -->
     <polygon
-      points="70,0 35,60.62 -35,60.62 -70,0 -35,-60.62 35,-60.62"
+      points="100,0 50,86.6 -50,86.6 -100,0 -50,-86.6 50,-86.6"
+      fill="url(#navyBg)"
+      stroke="url(#goldBand)"
+      stroke-width="3"
+    />
+
+    <!-- Inner hexagon (slightly smaller, just the border, no fill) -->
+    <polygon
+      points="90,0 45,77.94 -45,77.94 -90,0 -45,-77.94 45,-77.94"
       fill="none"
-      stroke="url(#unhGrad)"
-      stroke-width="2.5"
-      stroke-linejoin="round"
+      stroke="url(#goldBand)"
+      stroke-width="1"
+      opacity="0.5"
     />
 
-    <!-- Inner hexagon: smaller, rotated 30 deg for visual depth, centered -->
-    <polygon
-      points="35,0 17.5,30.31 -17.5,30.31 -35,0 -17.5,-30.31 17.5,-30.31"
-      fill="none"
-      stroke="url(#unhGrad)"
-      stroke-width="1.5"
-      stroke-linejoin="round"
-      opacity="0.7"
-    />
-
-    <!-- Center: small filled hexagon (the "core") -->
-    <polygon
-      points="12,0 6,10.39 -6,10.39 -12,0 -6,-10.39 6,-10.39"
-      fill="url(#unhGrad)"
-    />
-
-    <!-- Small hexagons at each outer vertex (the "recursive" / fractal part) -->
-    <!-- Sized to fit within the outer hex bounds; centered on the same centroid -->
-    <g>
-      <!-- Top-right vertex (70, 0) -->
-      <polygon points="70,0 65.5,7.79 56.5,7.79 52,0 56.5,-7.79 65.5,-7.79" fill="url(#unhGrad)" opacity="0.9"/>
-      <!-- Right-bottom vertex (35, 60.62) -->
-      <polygon points="35,60.62 30.5,68.41 21.5,68.41 17,60.62 21.5,52.83 30.5,52.83" fill="url(#unhGrad)" opacity="0.9"/>
-      <!-- Left-bottom vertex (-35, 60.62) -->
-      <polygon points="-35,60.62 -39.5,68.41 -48.5,68.41 -53,60.62 -48.5,52.83 -39.5,52.83" fill="url(#unhGrad)" opacity="0.9"/>
-      <!-- Left vertex (-70, 0) -->
-      <polygon points="-70,0 -74.5,7.79 -83.5,7.79 -88,0 -83.5,-7.79 -74.5,-7.79" fill="url(#unhGrad)" opacity="0.9"/>
-      <!-- Left-top vertex (-35, -60.62) -->
-      <polygon points="-35,-60.62 -39.5,-52.83 -48.5,-52.83 -53,-60.62 -48.5,-68.41 -39.5,-68.41" fill="url(#unhGrad)" opacity="0.9"/>
-      <!-- Right-top vertex (35, -60.62) -->
-      <polygon points="35,-60.62 30.5,-52.83 21.5,-52.83 17,-60.62 21.5,-68.41 30.5,-68.41" fill="url(#unhGrad)" opacity="0.9"/>
+    <!-- Celtic-knot network: weaving bands of teal and gold -->
+    <!-- These are 3-4 curving paths that interweave around the icons -->
+    <g fill="none" stroke-linecap="round" stroke-width="2.5">
+      <!-- Teal band 1: top-left to bottom-right, weaving -->
+      <path d="M -75,-43 Q -30,-65 30,-30 Q 65,0 75,43" stroke="url(#tealBand)"/>
+      <!-- Teal band 2: bottom-left to top-right, weaving -->
+      <path d="M -75,43 Q -30,65 30,30 Q 65,0 75,-43" stroke="url(#tealBand)" opacity="0.85"/>
+      <!-- Gold band 1: top to bottom, weaving through center -->
+      <path d="M 0,-80 Q -25,-30 0,0 Q 25,30 0,80" stroke="url(#goldBand)"/>
+      <!-- Gold band 2: right to left, weaving through center -->
+      <path d="M 80,0 Q 30,25 0,0 Q -30,-25 -80,0" stroke="url(#goldBand)" opacity="0.85"/>
     </g>
 
-    <!-- Connection lines from center to each outer vertex (the "unified network") -->
-    <g stroke="url(#unhGrad)" stroke-width="1" opacity="0.5" stroke-linecap="round">
-      <line x1="0" y1="0" x2="70" y2="0"/>
-      <line x1="0" y1="0" x2="35" y2="60.62"/>
-      <line x1="0" y1="0" x2="-35" y2="60.62"/>
-      <line x1="0" y1="0" x2="-70" y2="0"/>
-      <line x1="0" y1="0" x2="-35" y2="-60.62"/>
-      <line x1="0" y1="0" x2="35" y2="-60.62"/>
+    <!-- 4 embedded icons at the quadrants -->
+    <!-- Top-left: microchip/CPU -->
+    <g transform="translate(-50,-50)">
+      <rect x="-10" y="-10" width="20" height="20" fill="none" stroke="#d4a574" stroke-width="1.5" rx="1"/>
+      <rect x="-5" y="-5" width="10" height="10" fill="none" stroke="#d4a574" stroke-width="1"/>
+      <!-- CPU pins -->
+      <line x1="-7" y1="-13" x2="-7" y2="-10" stroke="#d4a574" stroke-width="1"/>
+      <line x1="0" y1="-13" x2="0" y2="-10" stroke="#d4a574" stroke-width="1"/>
+      <line x1="7" y1="-13" x2="7" y2="-10" stroke="#d4a574" stroke-width="1"/>
+      <line x1="-7" y1="10" x2="-7" y2="13" stroke="#d4a574" stroke-width="1"/>
+      <line x1="0" y1="10" x2="0" y2="13" stroke="#d4a574" stroke-width="1"/>
+      <line x1="7" y1="10" x2="7" y2="13" stroke="#d4a574" stroke-width="1"/>
+      <line x1="-13" y1="-7" x2="-10" y2="-7" stroke="#d4a574" stroke-width="1"/>
+      <line x1="-13" y1="0" x2="-10" y2="0" stroke="#d4a574" stroke-width="1"/>
+      <line x1="-13" y1="7" x2="-10" y2="7" stroke="#d4a574" stroke-width="1"/>
+      <line x1="10" y1="-7" x2="13" y2="-7" stroke="#d4a574" stroke-width="1"/>
+      <line x1="10" y1="0" x2="13" y2="0" stroke="#d4a574" stroke-width="1"/>
+      <line x1="10" y1="7" x2="13" y2="7" stroke="#d4a574" stroke-width="1"/>
+    </g>
+
+    <!-- Top-right: human head profile -->
+    <g transform="translate(50,-50)">
+      <path d="M -8,-12 Q -10,-2 -7,5 Q -7,8 -3,10 L -3,13 L 6,13 L 6,5 Q 10,0 9,-6 Q 8,-13 0,-13 Q -7,-13 -8,-12 Z"
+            fill="none" stroke="#3a9b8f" stroke-width="1.5"/>
+      <circle cx="2" cy="-5" r="1" fill="#3a9b8f"/>
+    </g>
+
+    <!-- Bottom-left: globe/wireframe sphere -->
+    <g transform="translate(-50,50)">
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#d4a574" stroke-width="1.5"/>
+      <ellipse cx="0" cy="0" rx="11" ry="4" fill="none" stroke="#d4a574" stroke-width="1"/>
+      <ellipse cx="0" cy="0" rx="4" ry="11" fill="none" stroke="#d4a574" stroke-width="1"/>
+      <line x1="-11" y1="0" x2="11" y2="0" stroke="#d4a574" stroke-width="1"/>
+      <line x1="0" y1="-11" x2="0" y2="11" stroke="#d4a574" stroke-width="1"/>
+    </g>
+
+    <!-- Bottom-right: three interlocking gears -->
+    <g transform="translate(50,50)">
+      <!-- Gear 1: top-left -->
+      <g transform="translate(-4,-3)">
+        <circle r="5" fill="none" stroke="#3a9b8f" stroke-width="1.2"/>
+        <circle r="2" fill="none" stroke="#3a9b8f" stroke-width="1"/>
+        <!-- Teeth -->
+        <line x1="0" y1="-5" x2="0" y2="-7" stroke="#3a9b8f" stroke-width="1.2"/>
+        <line x1="0" y1="5" x2="0" y2="7" stroke="#3a9b8f" stroke-width="1.2"/>
+        <line x1="-5" y1="0" x2="-7" y2="0" stroke="#3a9b8f" stroke-width="1.2"/>
+        <line x1="5" y1="0" x2="7" y2="0" stroke="#3a9b8f" stroke-width="1.2"/>
+      </g>
+      <!-- Gear 2: bottom-right -->
+      <g transform="translate(4,4)">
+        <circle r="5" fill="none" stroke="#3a9b8f" stroke-width="1.2"/>
+        <circle r="2" fill="none" stroke="#3a9b8f" stroke-width="1"/>
+        <line x1="0" y1="-5" x2="0" y2="-7" stroke="#3a9b8f" stroke-width="1.2"/>
+        <line x1="0" y1="5" x2="0" y2="7" stroke="#3a9b8f" stroke-width="1.2"/>
+        <line x1="-5" y1="0" x2="-7" y2="0" stroke="#3a9b8f" stroke-width="1.2"/>
+        <line x1="5" y1="0" x2="7" y2="0" stroke="#3a9b8f" stroke-width="1.2"/>
+      </g>
+      <!-- Gear 3: top-right, smaller -->
+      <g transform="translate(4,-4)">
+        <circle r="3" fill="none" stroke="#3a9b8f" stroke-width="1"/>
+        <line x1="0" y1="-3" x2="0" y2="-5" stroke="#3a9b8f" stroke-width="1"/>
+        <line x1="0" y1="3" x2="0" y2="5" stroke="#3a9b8f" stroke-width="1"/>
+        <line x1="-3" y1="0" x2="-5" y2="0" stroke="#3a9b8f" stroke-width="1"/>
+        <line x1="3" y1="0" x2="5" y2="0" stroke="#3a9b8f" stroke-width="1"/>
+      </g>
+    </g>
+
+    <!-- Glowing nodes at key points along the bands -->
+    <g fill="#ffffff" filter="url(#glow)">
+      <circle cx="0" cy="-80" r="2.5"/>
+      <circle cx="0" cy="80" r="2.5"/>
+      <circle cx="-80" cy="0" r="2.5"/>
+      <circle cx="80" cy="0" r="2.5"/>
+      <circle cx="0" cy="0" r="3"/>
+      <circle cx="40" cy="-40" r="2"/>
+      <circle cx="-40" cy="40" r="2"/>
+      <circle cx="40" cy="40" r="2"/>
+      <circle cx="-40" cy="-40" r="2"/>
+      <circle cx="0" cy="-50" r="1.5"/>
+      <circle cx="0" cy="50" r="1.5"/>
+      <circle cx="-50" cy="0" r="1.5"/>
+      <circle cx="50" cy="0" r="1.5"/>
     </g>
   </g>
 </svg>
