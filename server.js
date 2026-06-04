@@ -19,6 +19,8 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'unifiednetworkholdings-site' });
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
