@@ -25,6 +25,11 @@ app.get('/health', (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Clean URL: /about → /about.html (Express serves .html automatically, this is just an alias)
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
