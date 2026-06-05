@@ -117,7 +117,18 @@ body.about .progress { display: block; }
   font-size: 14px;
   letter-spacing: 0.02em;
 }
-.brand-mark { color: var(--accent); }
+.brand-mark {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.brand-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 .top-nav {
   display: flex;
@@ -147,6 +158,11 @@ body.landing .hero-mark {
   width: 140px;
   height: 140px;
   margin: 0 0 40px;
+}
+body.landing .hero-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .kicker {

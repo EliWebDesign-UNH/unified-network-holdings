@@ -12,7 +12,6 @@
   <link rel="canonical" href="https://unifiednetworkholdings.com">
   <link rel="stylesheet" href="/styles.css">
   <link rel="icon" type="image/svg+xml" href="/logo-mark.svg?v=7">
-  <link rel="preload" as="image" type="image/svg+xml" href="/logo.svg?v=6">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -52,7 +51,30 @@
   <main class="wrap" id="main">
     <header class="top">
       <a href="/" class="brand" aria-label="Unified Network Holdings home">
-        <img src="/logo-mark.svg?v=7" class="brand-mark" width="32" height="32" alt="Unified Network Holdings logo" />
+        <span class="brand-mark" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+            <defs>
+              <linearGradient id="unhMark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#c8ff00"/>
+                <stop offset="100%" stop-color="#88c000"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(120,120)">
+              <circle cx="0" cy="0" r="110" fill="url(#unhMark)"/>
+              <circle cx="0" cy="0" r="110" fill="none" stroke="#0a1929" stroke-width="3"/>
+              <circle cx="0" cy="0" r="92" fill="#0a1929"/>
+              <circle cx="0" cy="0" r="24" fill="none" stroke="url(#unhMark)" stroke-width="3"/>
+              <g fill="none" stroke="url(#unhMark)" stroke-width="3">
+                <circle cx="48" cy="0" r="24"/>
+                <circle cx="24" cy="-41.57" r="24"/>
+                <circle cx="-24" cy="-41.57" r="24"/>
+                <circle cx="-48" cy="0" r="24"/>
+                <circle cx="-24" cy="41.57" r="24"/>
+                <circle cx="24" cy="41.57" r="24"/>
+              </g>
+            </g>
+          </svg>
+        </span>
         <span class="brand-name">UNH</span>
       </a>
       <nav class="top-nav" aria-label="Sections">
@@ -66,7 +88,55 @@
     </header>
 
     <section class="hero">
-      <img src="/logo.svg?v=6" class="hero-mark" width="140" height="140" alt="Unified Network Holdings fractal mark" />
+      <div class="hero-mark" aria-label="Unified Network Holdings fractal mark">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img">
+          <defs>
+            <linearGradient id="unhFractal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c8ff00"/>
+              <stop offset="100%" stop-color="#88c000"/>
+            </linearGradient>
+          </defs>
+          <g transform="translate(120,120)">
+            <circle cx="0" cy="0" r="110" fill="url(#unhFractal)"/>
+            <circle cx="0" cy="0" r="110" fill="none" stroke="#0a1929" stroke-width="3"/>
+            <circle cx="0" cy="0" r="95" fill="#0a1929"/>
+            <circle cx="0" cy="0" r="95" fill="none" stroke="#0a1929" stroke-width="1" opacity="0.5"/>
+            <circle cx="0" cy="0" r="22" fill="none" stroke="url(#unhFractal)" stroke-width="2.5"/>
+            <g fill="none" stroke="url(#unhFractal)" stroke-width="2">
+              <circle cx="44" cy="0" r="22"/>
+              <circle cx="22" cy="-38.1" r="22"/>
+              <circle cx="-22" cy="-38.1" r="22"/>
+              <circle cx="-44" cy="0" r="22"/>
+              <circle cx="-22" cy="38.1" r="22"/>
+              <circle cx="22" cy="38.1" r="22"/>
+            </g>
+            <g fill="url(#unhFractal)">
+              <circle cx="36.4" cy="-22" r="4"/>
+              <circle cx="0" cy="-51" r="4"/>
+              <circle cx="-36.4" cy="-22" r="4"/>
+              <circle cx="-36.4" cy="22" r="4"/>
+              <circle cx="0" cy="51" r="4"/>
+              <circle cx="36.4" cy="22" r="4"/>
+            </g>
+            <g fill="url(#unhFractal)">
+              <circle cx="22" cy="0" r="3"/>
+              <circle cx="11" cy="-19" r="3"/>
+              <circle cx="-11" cy="-19" r="3"/>
+              <circle cx="-22" cy="0" r="3"/>
+              <circle cx="-11" cy="19" r="3"/>
+              <circle cx="11" cy="19" r="3"/>
+            </g>
+            <g fill="url(#unhFractal)" opacity="0.6">
+              <circle cx="80" cy="0" r="2"/>
+              <circle cx="40" cy="-69.3" r="2"/>
+              <circle cx="-40" cy="-69.3" r="2"/>
+              <circle cx="-80" cy="0" r="2"/>
+              <circle cx="-40" cy="69.3" r="2"/>
+              <circle cx="40" cy="69.3" r="2"/>
+            </g>
+          </g>
+        </svg>
+      </div>
       <p class="kicker"><span class="dot"></span> Albuquerque, New Mexico · Est. 2024</p>
       <h1 class="headline">A private holding company for <span class="accent">operating businesses.</span></h1>
       <p class="lede">Unified Network Holdings owns, governs, and provides operating support to a portfolio of wholly-owned subsidiaries in the digital services space.</p>
