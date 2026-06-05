@@ -24,6 +24,11 @@
 *::selection { background: var(--accent); color: #000; }
 
 html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -37,11 +42,55 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
+/* === SKIP LINK (a11y) === */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  background: var(--accent);
+  color: #000;
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 12px; }
+
+/* === READING PROGRESS BAR === */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  z-index: 99;
+  pointer-events: none;
+}
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.08s linear;
+  box-shadow: 0 0 8px var(--accent);
+}
+
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 24px;
 }
+
+/* On desktop, shift content right to make room for the rail */
+@media (min-width: 1100px) {
+  .wrap { padding-left: 224px; }
+}
+
+/* Anchor scroll offset to account for the top bar */
+section[id] { scroll-margin-top: 80px; }
 
 /* === TOP BAR === */
 .top {
@@ -50,6 +99,109 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
+}
+
+/* === LEFT RAIL (desktop nav) === */
+.rail {
+  position: fixed;
+  top: 50%;
+  left: 24px;
+  transform: translateY(-50%);
+  z-index: 50;
+  width: 168px;
+  font-family: var(--mono);
+}
+
+.rail-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+  margin-bottom: 12px;
+  padding-left: 32px;
+  position: relative;
+}
+.rail-eyebrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 24px;
+  height: 1px;
+  background: var(--line-2);
+}
+
+.rail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+.rail-list::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 6px;
+  width: 1px;
+  background: var(--line);
+}
+
+.rail-list a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 8px 0;
+  position: relative;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  transition: color 0.18s ease;
+}
+
+.rail-list a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 13px;
+  height: 1px;
+  background: var(--line-2);
+  transition: all 0.18s ease;
+}
+
+.rail-list a:hover { color: var(--text); }
+.rail-list a:hover::before { background: var(--accent); width: 18px; }
+.rail-list a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.rail-list a.is-active {
+  color: var(--accent);
+  font-weight: 500;
+}
+.rail-list a.is-active::before {
+  background: var(--accent);
+  width: 24px;
+  height: 2px;
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.rail-num {
+  display: inline-block;
+  min-width: 22px;
+  font-size: 11px;
+  color: inherit;
+  opacity: 0.6;
+  text-align: right;
+}
+.rail-list a.is-active .rail-num { opacity: 1; }
+
+.rail-label {
+  font-size: 12px;
 }
 
 .brand {
@@ -337,7 +489,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 .co-cta { color: var(--accent); }
-.co-domain { color: var(--dim); }
+.co-domain {
+  color: var(--dim);
+  transition: color 0.2s ease;
+}
+.co:hover .co-domain { color: var(--accent); }
 
 .portfolio-foot {
   font-family: var(--mono);
@@ -415,6 +571,68 @@ a { color: inherit; text-decoration: none; }
   font-size: 15px;
 }
 
+.bio-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line-2);
+  padding: 4px 0 6px;
+  margin: 8px 0 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.bio-toggle:hover { border-color: var(--accent); }
+.bio-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.bio-toggle .bio-toggle-hide { display: none; }
+.bio-toggle[aria-expanded="true"] .bio-toggle-show { display: none; }
+.bio-toggle[aria-expanded="true"] .bio-toggle-hide { display: inline; }
+
+.bio-more {
+  border-left: 2px solid var(--line-2);
+  padding-left: 20px;
+  margin-left: 4px;
+  animation: bioFadeIn 0.25s ease-out;
+}
+@keyframes bioFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === MOBILE SECTION PILL === */
+.section-pill {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text);
+  z-index: 90;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  gap: 8px;
+}
+.section-pill-num {
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
 /* === § 05 — CONTACT === */
 .contact { margin: 0 0 64px; }
 
@@ -483,6 +701,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* === RESPONSIVE === */
+@media (max-width: 1099px) {
+  .rail { display: none; }
+}
+
 @media (max-width: 900px) {
   .mandate-pillars { grid-template-columns: 1fr; }
   .pillar { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 0; }
@@ -508,6 +730,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 600px) {
   .top-nav { display: none; }
+  .section-pill { display: inline-flex; }
   .hero { padding: 48px 0 64px; }
   .co-foot { flex-direction: column; align-items: flex-start; gap: 8px; }
   .foot { flex-direction: column; gap: 8px; align-items: flex-start; }

@@ -47,7 +47,13 @@
   </script>
 </head>
 <body>
-  <main class="wrap">
+  <!-- Skip link for keyboard users -->
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Reading progress bar -->
+  <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+  <main class="wrap" id="main">
     <header class="top">
       <a href="/" class="brand" aria-label="Unified Network Holdings home">
         <img src="/logo-mark.svg?v=7" class="brand-mark" width="32" height="32" alt="Unified Network Holdings logo" />
@@ -61,6 +67,18 @@
         <a href="#contact">Contact</a>
       </nav>
     </header>
+
+    <!-- Persistent left rail (desktop) — table of contents -->
+    <nav class="rail" aria-label="Section navigation">
+      <div class="rail-eyebrow">Sections</div>
+      <ol class="rail-list">
+        <li><a href="#mandate" data-section="mandate"><span class="rail-num">01</span><span class="rail-label">Mandate</span></a></li>
+        <li><a href="#approach" data-section="approach"><span class="rail-num">02</span><span class="rail-label">Approach</span></a></li>
+        <li><a href="#portfolio" data-section="portfolio"><span class="rail-num">03</span><span class="rail-label">Portfolio</span></a></li>
+        <li><a href="#operator" data-section="operator"><span class="rail-num">04</span><span class="rail-label">Operator</span></a></li>
+        <li><a href="#contact" data-section="contact"><span class="rail-num">05</span><span class="rail-label">Inquiries</span></a></li>
+      </ol>
+    </nav>
 
     <section class="hero">
       <img src="/logo.svg?v=6" class="hero-mark" width="180" height="180" alt="Unified Network Holdings fractal mark" />
@@ -174,9 +192,15 @@
           <div class="operator-role">Founder · Communication student, NMSU</div>
         </div>
         <div class="operator-bio">
-          <p>Eli founded Unified Network Holdings in 2024 in Albuquerque, New Mexico. The model is simple: build operating companies that serve the local New Mexico market, hold them for the long term, and reinvest every dollar back into the portfolio.</p>
-          <p>He is also a communication student at New Mexico State University — an unusual but deliberate combination. The best operating companies aren't the ones with the best product; they're the ones that translate a customer's problem clearly to the people trying to solve it. That translation is what the holding company optimizes for across its subsidiaries.</p>
-          <p>Prior to founding UNH, Eli shipped and maintained the websites you can see in the portfolio below — building the operating muscle in public before abstracting it into a holding structure.</p>
+          <p class="bio-lead">Eli founded Unified Network Holdings in 2024 in Albuquerque, New Mexico. The model is simple: build operating companies that serve the local New Mexico market, hold them for the long term, and reinvest every dollar back into the portfolio.</p>
+          <button class="bio-toggle" id="bioToggle" aria-expanded="false" aria-controls="bioMore">
+            <span class="bio-toggle-show">Read full bio</span>
+            <span class="bio-toggle-hide">Collapse bio</span>
+          </button>
+          <div class="bio-more" id="bioMore" hidden>
+            <p>He is also a communication student at New Mexico State University — an unusual but deliberate combination. The best operating companies aren't the ones with the best product; they're the ones that translate a customer's problem clearly to the people trying to solve it. That translation is what the holding company optimizes for across its subsidiaries.</p>
+            <p>Prior to founding UNH, Eli shipped and maintained the websites you can see in the portfolio below — building the operating muscle in public before abstracting it into a holding structure.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -215,8 +239,111 @@
     </footer>
   </main>
 
+  <!-- Mobile section pill (shows current section, fixed at bottom) -->
+  <div class="section-pill" id="sectionPill" aria-hidden="true">
+    <span class="section-pill-num">01</span>
+    <span class="section-pill-label">Mandate</span>
+  </div>
+
   <script>
+    // Set year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // === Bio toggle ===
+    (function() {
+      const btn = document.getElementById('bioToggle');
+      const more = document.getElementById('bioMore');
+      if (!btn || !more) return;
+      btn.addEventListener('click', function() {
+        const isOpen = !more.hasAttribute('hidden');
+        if (isOpen) {
+          more.setAttribute('hidden', '');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          more.removeAttribute('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    })();
+
+    // === Active section highlighting + progress bar + mobile pill ===
+    (function() {
+      const sections = ['mandate', 'approach', 'portfolio', 'operator', 'contact']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+      const railLinks = document.querySelectorAll('.rail a[data-section]');
+      const pill = document.getElementById('sectionPill');
+      const progressBar = document.getElementById('progressBar');
+
+      function updateProgress() {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY;
+        const pct = docHeight > 0 ? Math.min(100, (scrolled / docHeight) * 100) : 0;
+        if (progressBar) progressBar.style.width = pct + '%';
+      }
+
+      function updateActiveSection() {
+        const scrollY = window.scrollY + window.innerHeight * 0.4;
+        let activeId = sections[0] ? sections[0].id : null;
+
+        for (const s of sections) {
+          if (s.offsetTop <= scrollY) {
+            activeId = s.id;
+          }
+        }
+
+        // Update rail
+        railLinks.forEach(link => {
+          const isActive = link.getAttribute('data-section') === activeId;
+          link.classList.toggle('is-active', isActive);
+          if (isActive) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+
+        // Update mobile pill
+        if (pill) {
+          const num = String(sections.findIndex(s => s.id === activeId) + 1).padStart(2, '0');
+          const label = activeId.charAt(0).toUpperCase() + activeId.slice(1);
+          pill.querySelector('.section-pill-num').textContent = '§ ' + num;
+          pill.querySelector('.section-pill-label').textContent =
+            activeId === 'contact' ? 'Inquiries' :
+            activeId.charAt(0).toUpperCase() + activeId.slice(1);
+        }
+      }
+
+      let ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            updateActiveSection();
+            updateProgress();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      updateActiveSection();
+      updateProgress();
+    })();
+
+    // === Smooth scroll for in-page anchors (respect prefers-reduced-motion) ===
+    (function() {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        });
+      });
+    })();
   </script>
 </body>
 </html>
